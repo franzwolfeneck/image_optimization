@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Image Optimization with low-res</title>
+  <style media="screen">
+    .placeholder {
+      background-color: #f6f6f6;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
+      width: 300px;
+      height: 450px;
+    }
+
+    .placeholder img {
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: opacity 1s linear;
+    }
+
+    .placeholder img.loaded {
+      opacity: 1;
+    }
+
+    .img-small {
+      filter: blur(50px);
+      transform: scale(1);
+    }
+  </style>
+  <!-- This script defers main.js -->
+  <script type="text/javascript">
+    function downloadJSAtOnload() {
+    var element = document.createElement("script");
+    element.src = "main.js";
+    document.body.appendChild(element);
+    }
+    if (window.addEventListener)
+    window.addEventListener("load", downloadJSAtOnload, false);
+    else if (window.attachEvent)
+    window.attachEvent("onload", downloadJSAtOnload);
+    else window.onload = downloadJSAtOnload;
+  </script>
+</head>
+
+<body>
+  <div class="placeholder" data-large="cover1_sRGB_scaled.jpg">
+    <!-- svg or jpg should be smaller than 500B -->
+    <img src="placeholder1.svg" class="img-small">
+    <div style="padding-bottom: 66.6%;"></div>
+  </div>
+  <!-- QUESTION: Why does this second image not lazy load? -->
+  <div class="placeholder" data-large="cover2.jpg">
+    <!-- svg or jpg should be smaller than 500B  -->
+    <img src="placeholder2.svg" class="img-small">
+    <div style="padding-bottom: 66.6%;"></div>
+  </div>
+</body>
+
+</html>
